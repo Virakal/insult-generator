@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" media="all">
+	<link rel="stylesheet" href="insult.min.css" media="all">
+	<meta name="viewport" content="width=device-width, user-scalable=no">
+	<style>
+		body {
+			margin: 4px;
+		}
+
+		.page-header {
+			border: none;
+		}
+
+		.generator {
+			font-size: 32px;
+			text-align: center;
+		}
+
+		.insult {
+			font-weight: bold;
+		}
+
+		.vowel-n {
+			display: none;
+		}
+
+		#more:focus {
+			outline-style: none;
+			-moz-box-shadow:    0px 0px 5px 4px #404040;
+			-webkit-box-shadow: 0px 0px 5px 4px #404040;
+			box-shadow:         0px 0px 5px 4px #404040;
+		}
+	</style>
+	<title>Insult Generator</title>
+</head>
+<body>
+	<div class="page-header">
+		<h1>
+			The Ultimate Insult Generator
+			<small>by Jonathan Goodger</small>
+		</h1>
+	</div>
+
+	<section class="generator">
+		<p>
+			<em>You know what? You're nothing but a<span class="vowel-n">n</span>&hellip;</em>
+		</p>
+
+		<p class="insult"></p>
+
+		<button id="more" class="btn btn-large btn-success">Give me more!</button>
+	</section>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script>
+		(function ($) {
+			var insults = {
+				a: [
+					'BUTTERFACE',
+					'CROSS-EYED',
+					'COMMUNIST',
+					'CREEPY',
+					'DICKNOSE',
+					'DRUG-LOVING',
+					'ELITIST',
+					'IDIOTIC',
+					'IMBECILIC',
+					'INBRED',
+					'INSECURE',
+					'MOUTH-BREATHING',
+					'LAZY',
+					'LILY-LIVERED',
+					'PIE-EATING',
+					'POMPOUS',
+					'RACIST',
+					'REPREHENSIBLE',
+					'SELF-CENTRED',
+					'SEPTIC',
+					'SLIMY',
+					'SLOVENLY',
+					'SLUTTY',
+					'SMELLY',
+					'STUPID',
+					'TONE-DEAF',
+					'UGLY',
+					'WHITE TRASH',
+					'YELLOW-BELLIED'
+				],
+				b: [
+					'ANAL',
+					'ASS',
+					'ARSE',
+					'BITCH',
+					'BONER',
+					'BUTT',
+					'CHOAD',
+					'COCK',
+					'CROTCH',
+					'CUNT',
+					'DICK',
+					'DOUCHE',
+					'FUCK',
+					'NUT',
+					'PRICK',
+					'RECTUM',
+					'SHART',
+					'SHIT',
+					'SLUT',
+					'SPHINCTER',
+					'TAINT',
+					'TURD',
+					'TWAT'
+				],
+				c: [
+					'BAGUETTE',
+					'BALLOON',
+					'BARGE',
+					'BISCUIT',
+					'BLOSSOM',
+					'BOX',
+					'CANOE',
+					'CARTON',
+					'CAPTAIN',
+					'CLOWN',
+					'DRAGON',
+					'GOBLIN',
+					'HAMMER',
+					'HOUND',
+					'JOCKEY',
+					'KNOB',
+					'MONSTER',
+					'NAZI',
+					'PILOT',
+					'PIRATE',
+					'SOCKET',
+					'WAFFLE',
+					'WART',
+					'WEASEL',
+					'WHORE'
+				]
+			};
+
+			function get_insult() {
+				var insult = [],
+					column;
+
+				for (var key in insults) {
+					column = insults[key];
+
+					insult.push(column[Math.floor(Math.random() * column.length)]);
+				}
+
+				return insult.join(' ');
+			}
+
+			var insult_p = $('.insult'),
+				vowel_n = $('.vowel-n');
+
+			$('#more').on('click', function () {
+				var insult = get_insult(),
+					vowel_pattern = /^[aeiou]/i;
+
+				insult_p.text(insult);
+				vowel_n[insult.match(vowel_pattern) ? 'show' : 'hide']();
+			}).
+			trigger('click');
+
+		})(jQuery);
+	</script>
+</body>
+</html>
